@@ -1,6 +1,6 @@
 {
   "name": "@gomint/client",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A client library to interact with the GoMint API seemlessly in JavaScript / TypeScript",
   "main": "dist/index.js",
   "scripts": {
