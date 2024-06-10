@@ -5,7 +5,7 @@ export interface AccountCreateDto {
 }
 
 export interface AccountCreateRes {
-  id: string;
+  accountId: string;
 }
 
 export interface GetAccountsRes {
