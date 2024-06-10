@@ -4,7 +4,7 @@ export interface AccountCreateDto {
     encryptionKey?: string;
 }
 export interface AccountCreateRes {
-    id: string;
+    accountId: string;
 }
 export interface GetAccountsRes {
     id: string;
