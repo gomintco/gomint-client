@@ -1,0 +1,28 @@
+{
+  "name": "gm-api-js-client",
+  "version": "0.0.1",
+  "description": "A client library to interact with the GoMint API seemlessly in JavScript / TypeScript",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gomintco/gomint-client.git"
+  },
+  "keywords": [
+    "GoMint",
+    "Hedera",
+    "Token",
+    "Service",
+    "Consensus",
+    "Service",
+    "Custodial"
+  ],
+  "author": "jaycool",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gomintco/gomint-client/issues"
+  },
+  "homepage": "https://github.com/gomintco/gomint-client#readme"
+}
