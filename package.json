@@ -1,7 +1,7 @@
 {
-  "name": "gm-api-js-client",
-  "version": "0.0.1",
-  "description": "A client library to interact with the GoMint API seemlessly in JavScript / TypeScript",
+  "name": "@gomint/client",
+  "version": "0.0.2",
+  "description": "A client library to interact with the GoMint API seemlessly in JavaScript / TypeScript",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
