@@ -44,6 +44,7 @@ export interface RoyaltyFee {
 }
 export interface TokenMintDto {
     tokenId: string;
+    tokenType: "ft" | "nft";
     payerId?: string;
     metadatas?: string[];
     metadata?: string;
