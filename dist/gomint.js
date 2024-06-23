@@ -21,7 +21,9 @@ class GoMintClient {
     }
     accountCreate(accountCreateDto) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.postClient(endpoints_1.ACCOUNT_CREATE, Object.assign({ encryptionKey: this.encryptionKey, type: app_interface_1.KeyType.ED25519 }, accountCreateDto));
+            return yield this.postClient(endpoints_1.ACCOUNT_CREATE, Object.assign({ 
+                // means it can be updated by accountCreateDto
+                type: app_interface_1.KeyType.ED25519 }, accountCreateDto));
         });
     }
     getAccounts() {
@@ -31,19 +33,19 @@ class GoMintClient {
     }
     tokenAssociate(tokenAssociateDto) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.postClient(endpoints_1.TOKEN_ASSOCIATE, Object.assign({ encryptionKey: this.encryptionKey }, tokenAssociateDto));
+            return yield this.postClient(endpoints_1.TOKEN_ASSOCIATE, Object.assign({}, tokenAssociateDto));
         });
     }
     tokenCreate(tokenCreateDto) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.postClient(endpoints_1.TOKEN_CREATE, Object.assign({ encryptionKey: this.encryptionKey, supplyKey: "default" }, tokenCreateDto));
+            return yield this.postClient(endpoints_1.TOKEN_CREATE, Object.assign({ supplyKey: "default" }, tokenCreateDto));
         });
     }
     tokenMint(tokenMintDto) {
         return __awaiter(this, void 0, void 0, function* () {
             if (tokenMintDto.amount && (tokenMintDto.amount > 10 || tokenMintDto.amount < 1))
                 throw new Error("Amount to mint must be 0 < n <= 10");
-            return yield this.postClient(endpoints_1.TOKEN_MINT, Object.assign({ encryptionKey: this.encryptionKey, supplyKey: "default", metadatas: [] }, tokenMintDto));
+            return yield this.postClient(endpoints_1.TOKEN_MINT, Object.assign({ supplyKey: "default", metadatas: [] }, tokenMintDto));
         });
     }
     dealCreate(dealCreate) {
@@ -60,9 +62,11 @@ class GoMintClient {
     }
     getClient(endpoint) {
         return __awaiter(this, void 0, void 0, function* () {
+            var _a;
             const response = yield fetch(`${this.baseUrl}${endpoint}`, {
                 headers: {
                     "x-api-key": this.apiKey,
+                    "x-encryption-key": (_a = this.encryptionKey) !== null && _a !== void 0 ? _a : ""
                 },
             });
             const json = yield response.json();
@@ -74,11 +78,13 @@ class GoMintClient {
     }
     postClient(endpoint, body) {
         return __awaiter(this, void 0, void 0, function* () {
+            var _a;
             const response = yield fetch(`${this.baseUrl}${endpoint}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "x-api-key": this.apiKey,
+                    "x-encryption-key": (_a = this.encryptionKey) !== null && _a !== void 0 ? _a : ""
                 },
                 body: JSON.stringify(body),
             });
