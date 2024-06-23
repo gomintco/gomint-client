@@ -35,7 +35,7 @@ export class GoMintClient {
     accountCreateDto: AccountCreateDto
   ): Promise<AccountCreateRes> {
     return await this.postClient(ACCOUNT_CREATE, {
-      encryptionKey: this.encryptionKey, // means it can be updated by accountCreateDto
+      // means it can be updated by accountCreateDto
       type: KeyType.ED25519,
       ...accountCreateDto,
     });
@@ -49,14 +49,12 @@ export class GoMintClient {
     tokenAssociateDto: TokenAssociateDto
   ): Promise<TokenAssociateRes> {
     return await this.postClient(TOKEN_ASSOCIATE, {
-      encryptionKey: this.encryptionKey,
       ...tokenAssociateDto,
     });
   }
 
   async tokenCreate(tokenCreateDto: TokenCreateDto): Promise<TokenCreateRes> {
     return await this.postClient(TOKEN_CREATE, {
-      encryptionKey: this.encryptionKey,
       supplyKey: "default", // default = treasury account (or payerId?)
       ...tokenCreateDto,
     });
@@ -66,7 +64,6 @@ export class GoMintClient {
     if (tokenMintDto.amount && (tokenMintDto.amount > 10 || tokenMintDto.amount < 1))
       throw new Error("Amount to mint must be 0 < n <= 10");
     return await this.postClient(TOKEN_MINT, {
-      encryptionKey: this.encryptionKey,
       supplyKey: "default",
       metadatas: [],
       ...tokenMintDto,
@@ -95,6 +92,7 @@ export class GoMintClient {
     const response = await fetch(`${this.baseUrl}${endpoint}`, {
       headers: {
         "x-api-key": this.apiKey,
+        "x-encryption-key": this.encryptionKey ?? ""
       },
     });
     const json = await response.json();
@@ -110,6 +108,7 @@ export class GoMintClient {
       headers: {
         "Content-Type": "application/json",
         "x-api-key": this.apiKey,
+        "x-encryption-key": this.encryptionKey ?? ""
       },
       body: JSON.stringify(body),
     });

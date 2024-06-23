@@ -1,20 +1,31 @@
+import { TokenCollectionMetadata, TokenMetadata } from "./metadata.interface";
+
+type TokenType = "ft" | "nft"
+
 export interface TokenCreateDto {
-  tokenName: string;
-  tokenSymbol: string;
-  tokenType: "ft" | "nft";
-  treasuryAccountId: string;
   payerId?: string;
-  supplyKey?: string;
+  tokenName: string;
+  tokenType: 'ft' | 'nft';
+  tokenSymbol: string;
+  decimals?: number;
+  initialSupply?: number;
+  treasuryAccountId: string;
   adminKey?: string;
-  freezeKey?: string;
   kycKey?: string;
-  pauseKey?: string;
+  freezeKey?: string;
   wipeKey?: string;
+  supplyKey?: string;
   feeScheduleKey?: string;
-  maxSupply?: number;
+  pauseKey?: string;
   fixedFees?: FixedFee[];
+  fractionalFees?: FractionalFee[];
   royaltyFees?: RoyaltyFee[];
-  encryptionKey?: string;
+  maxSupply?: number;
+  finite?: boolean;
+  expirationTime?: number;
+  autoRenewAccountId?: string;
+  metadataKey?: string;
+  metadata?: string | TokenCollectionMetadata;
 }
 
 export interface TokenCreateRes {
@@ -40,6 +51,16 @@ export interface FixedFee {
   allCollectorsAreExempt?: boolean;
 }
 
+export interface FractionalFee {
+  feeCollectorAccountId: string;
+  numerator: number;
+  denominator: number;
+  max?: number;
+  min?: number;
+  senderPaysFees?: boolean;
+  allCollectorsAreExempt?: boolean;
+}
+
 export interface RoyaltyFee {
   feeCollectorAccountId: string;
   numerator: number;
@@ -48,15 +69,14 @@ export interface RoyaltyFee {
   allCollectorsAreExempt?: boolean;
 }
 
-export interface TokenMintDto {
+export  interface TokenMintDto {
+  tokenType: TokenType;
   tokenId: string;
-  tokenType: "ft" | "nft";
-  payerId?: string;
-  metadatas?: string[];
-  metadata?: string;
   amount?: number;
   supplyKey?: string;
-  encryptionKey?: string;
+  payerId?: string;
+  metadatas?: (string | TokenMetadata)[];
+  metadata?: string | TokenMetadata;
 }
 
 export interface TokenMintRes {
