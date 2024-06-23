@@ -1,7 +1,7 @@
 export interface AccountCreateDto {
     type?: KeyType;
     alias?: string;
-    encryptionKey?: string;
+    payerId?: string;
 }
 export interface AccountCreateRes {
     accountId: string;
