@@ -6,6 +6,6 @@ exports.ACCOUNT_CREATE = '/account';
 // TOKEN ACTIONS
 exports.TOKEN_CREATE = '/token';
 exports.TOKEN_MINT = '/token/mint';
-exports.TOKEN_ASSOCIATE = '/token/associate';
+exports.TOKEN_ASSOCIATE = '/token/association';
 // DEAL ACTIONS
 exports.DEAL_CREATE = '/deal';
